@@ -49,11 +49,17 @@ class BookisbnTest < Minitest::Test
   def test_thirteen
     assert_equal "978-7-115-36646-7", @isbn.thirteen
     assert_equal "978 7 115 36646 7", @isbn.thirteen(" ")
+    assert_equal "978-7-81074-096-2", @isbn_ten.thirteen
+    assert_equal "978 7 81074 096 2", @isbn_ten.thirteen(" ")
+    assert_equal "978,7,81074,096,2", @isbn_ten.thirteen(",")
   end
 
   def test_ten
-    assert_equal "7-115-36646-7", @isbn.ten
-    assert_equal "7 115 36646 7", @isbn.ten(" ")
+    assert_equal "7-81074-096-2", @isbn_ten.ten
+    assert_equal "7 81074 096 2", @isbn_ten.ten(" ")
+    assert_equal "7-115-36646-9", @isbn.ten
+    assert_equal "7 115 36646 9", @isbn.ten(" ")
+    assert_equal "7/115/36646/9", @isbn.ten("/")
   end
 
   def test_validate?

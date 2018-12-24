@@ -108,7 +108,9 @@ module Bookisbn
             sum += @isbn[i].to_i * 3
           end
         end
-        if 10 - sum%10 == @isbn[12].to_i
+        if sum%10 == 0 and @isbn[12].to_i == 0
+          return true
+        elsif 10 - sum%10 == @isbn[12].to_i
           return true
         else
           return false
@@ -151,11 +153,70 @@ module Bookisbn
     end
 
     def thirteen(joiner="-")
-      [@ean_ucc, @group, @publisher, @title, @check_digit].join(joiner)
+    
+      # export 13 with different style
+      if @isbn.length == 13
+        [@ean_ucc, @group, @publisher, @title, @check_digit].join(joiner)
+      
+      # convert 10 to 13
+      elsif @isbn.length == 10
+        sum = 0
+        new_isbn = "978" + @isbn
+        new_check_digit = 0
+        
+        for i in 0..11
+          if new_isbn[i].to_i.odd?
+            sum += new_isbn[i].to_i * 1
+          else
+            sum += new_isbn[i].to_i * 3
+          end
+        end
+        
+        if sum%10 == 0
+          new_check_digit = 0
+        else
+          new_check_digit = 10 - sum%10
+        end
+        
+
+        ["978", @group, @publisher, @title, new_check_digit].join(joiner)
+      else
+        return false
+      end
+      
     end
 
     def ten(joiner="-")
-      [@group, @publisher, @title, @check_digit].join(joiner)
+    
+      # import 10, export 10
+      if @isbn.length == 10
+        [@group, @publisher, @title, @check_digit].join(joiner)
+      
+      # import 13, export 10
+      elsif @isbn.length == 13
+        sum = 0
+        new_check_digit = ""
+        
+        for i in 3..11
+          sum += @isbn[i].to_i * (10 - i)
+        end
+        
+        cd = 11 - sum%11
+        
+        case cd
+        
+        when 10
+          new_check_digit = "X"
+        when 11
+          new_check_digit = "0"
+        else
+          new_check_digit = cd.to_s
+        end
+          
+        [@group, @publisher, @title, new_check_digit].join(joiner)
+      else
+        return false
+      end
     end
   end
 end
