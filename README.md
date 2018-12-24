@@ -36,7 +36,9 @@ Or install it yourself as:
 @isbn.check_digit # get ISBN check digit
 
 @isbn.thirteen # generate ISBN with 13 digits and join with -
+@isbn.thirteen(" ") # generate ISBN with 13 digits and join with space
 @isbn.ten # generate ISBN with 10 digitsand join with -
+@isbn.ten(" ") # generate ISBN with 10 digitsand join with space
 ```
 
 ## Development
@@ -47,12 +49,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bookisbn. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/hfl/bookisbn. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Code of Conduct
-
-Everyone interacting in the Bookisbn project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/bookisbn/blob/master/CODE_OF_CONDUCT.md).
